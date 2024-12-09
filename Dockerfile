@@ -1,8 +1,7 @@
-# Utilisation de l'image NGINX comme base
-FROM nginx:alpine
-# Copier le fichier index.html dans le conteneur
-COPY index.html /usr/share/nginx/html/index.html
-# Exposer le port 80
-EXPOSE 80
-# Lancer NGINX
-CMD ["nginx", "-g", "daemon off;"]
+FROM python:3.9-slim
+
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "-m", "app"]
